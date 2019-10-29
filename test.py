@@ -1,0 +1,67 @@
+from PIL import Image
+import copy
+import random
+import numpy as np
+
+# TODO: Mateusz: Krzyżowanie, mutacja,
+#       Michał: Funkcja celu, kwadraty + funkcja konwersji
+#
+#
+#
+class Population:
+    def __init__(self, miu, square_num, image_x, image_y):
+        # Generate population
+        print('Generating population of size:', miu)
+        specimen = []
+        for i in range(0, miu):
+            specimen.append(Specimen(square_num, image_x, image_y))
+
+
+# Member of a population
+class Specimen:
+    def __init__(self, square_num, image_x, image_y):
+        # Generate one member of a population - specimen(image)
+        self.squares = []
+        for i in range(square_num):
+            self.squares.append(Square(100, 100))
+            self.rgbmap = np.zeros((image_x, image_y, 3), dtype=np.uint8) + 255
+            print(self.rgbmap.shape)
+            #self.image = Image.fromarray(self.rgbmap)
+            #self.image.show()
+
+
+
+class Square:
+    def __init__(self, border_x, border_y):
+        self.color = [random.randint(0, 255) for k in range(3)]
+        self.alpha = random.randint(0, 100)
+        self.point = [random.randint(0, border_x), random.randint(0, border_y)]    #TODO: CHECK!
+        self.dim = [random.randint(0, border_x-self.point[0]), random.randint(0, border_y-self.point[1])]   #TODO: CHECK!
+
+# Check if algorithm should stop
+def is_stop(p):
+    return False
+
+def main():
+    print("starting algorithm")
+    u = 10  # miu
+    l = 12  # lambda
+    prostokaty=100
+    image_x=100
+    image_y=100
+    population = Population(u, prostokaty, image_x, image_y)
+
+    # Algorith
+    while not is_stop(population):
+        # Create temporary population T
+        temporary_population = population.generate_random(l);
+
+        # Selection: crossover, mutation then selection
+        reproduced = temporary_population.selection()
+        population = reproduced
+    else:
+        # If the stop condition is met, return best specimen
+        best = population.get_best()
+
+if __name__ == '__main__':
+    main()
