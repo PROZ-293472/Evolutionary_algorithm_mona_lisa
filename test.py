@@ -8,6 +8,8 @@ import numpy as np
 #
 #
 #
+
+
 class Population:
     def __init__(self, miu, square_num, image_x, image_y):
         # Generate population
@@ -30,7 +32,6 @@ class Specimen:
             #self.image.show()
 
 
-
 class Square:
     def __init__(self, border_x, border_y):
         self.color = [random.randint(0, 255) for k in range(3)]
@@ -38,9 +39,29 @@ class Square:
         self.point = [random.randint(0, border_x), random.randint(0, border_y)]    #TODO: CHECK!
         self.dim = [random.randint(0, border_x-self.point[0]), random.randint(0, border_y-self.point[1])]   #TODO: CHECK!
 
+
 # Check if algorithm should stop
 def is_stop(p):
     return False
+
+
+def create_target(img):
+    arr = np.asarray(img)
+    return arr
+
+
+def calculate_error(rgba_map, target_map):
+    sub = np.subtract(rgba_to_rgb(rgba_map), target_map)
+    (raw_errR, raw_errG, raw_errB) = (np.sum(sub[0, :, :]), np.sum(sub[1, :, :]), np.sum(sub[2, :, :]))
+    # TODO: Wymyslec, w jaki sposob normalizowac bledy
+    return raw_errR, raw_errG, raw_errB
+
+
+def rgba_to_rgb(rgba_map):
+    img = Image.fromarray(rgba_map)
+    img = img.convert('RGB')
+    return np.asarray(img)
+
 
 def main():
     print("starting algorithm")
