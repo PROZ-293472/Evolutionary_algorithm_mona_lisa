@@ -24,6 +24,7 @@ class Specimen:
     def __init__(self, square_num, image_x, image_y):
         # Generate one member of a population - specimen(image)
         self.squares = []
+        self.sigmas = np.zeros(square_num);
         for i in range(square_num):
             self.squares.append(Square(100, 100))
             self.rgbmap = np.zeros((image_x, image_y, 3), dtype=np.uint8) + 255
@@ -74,8 +75,11 @@ def main():
 
     # Algorith
     while not is_stop(population):
+        # TODO: 1. wybrac populacje o dobrej wielkosci - funkcja generate_random()
+        #       2.
+        #
         # Create temporary population T
-        temporary_population = population.generate_random(l);
+        temporary_population = population.generate_random(l)
 
         # Selection: crossover, mutation then selection
         reproduced = temporary_population.selection()
