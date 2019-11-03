@@ -1,5 +1,5 @@
 import numpy as np
-from PIL import Image
+from PIL import Image, ImageDraw
 
 from src.entities.square import Square
 
@@ -8,10 +8,22 @@ from src.entities.square import Square
 #arr = np.asarray(im)
 #print(arr)
 #print(arr.dtype)
-img = Image.new('RGB', (500, 500))
-sqr = Square(500, 500)
-sqr.draw(img)
+a = [1,2,3]
+b = 4
+c = tuple([a,b])
+img = Image.new('RGB', (100, 100))
+drw = ImageDraw.Draw(img, 'RGBA')
+drw.polygon([(50, 0), (100, 100), (0, 100)], (255, 0, 0, 125))
+drw.polygon([(50,100), (100, 0), (0, 0)], (0, 255, 0, 125))
+del drw
+#img.show()
 
+
+img = Image.new('RGB', (500, 500), (255, 255, 255))
+for i in range (1,100):
+    sqr = Square(500, 500)
+    sqr.draw(img)
+img.show()
 #im1 = Image.fromarray(arr)
 #im1 = im1.convert('RGB')
 #arr1 = np.asarray(im1)
