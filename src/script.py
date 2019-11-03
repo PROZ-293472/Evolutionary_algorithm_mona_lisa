@@ -3,17 +3,19 @@ from PIL import Image
 
 from src.entities.square import Square
 
-im = Image.open('mona.png')
+#im = Image.open('mona.png')
 #im.show()
-arr = np.asarray(im)
+#arr = np.asarray(im)
 #print(arr)
 #print(arr.dtype)
 img = Image.new('RGB', (500, 500))
+sqr = Square(500, 500)
+sqr.draw(img)
 
-im1 = Image.fromarray(arr)
-im1 = im1.convert('RGB')
-arr1 = np.asarray(im1)
-sqr  = Square()
+#im1 = Image.fromarray(arr)
+#im1 = im1.convert('RGB')
+#arr1 = np.asarray(im1)
+#sqr  = Square()
 #print(arr1.shape)
 
 b = np.array([[[1,2,3],[4,5,6],[7,8,9]] , [[11,12,13],[14,15,16],[17,18,19]]])
