@@ -1,7 +1,8 @@
 from PIL import Image
 import copy
-import random
+
 import numpy as np
+from PIL import Image, ImageDraw
 
 # TODO: Mateusz: Krzyżowanie, mutacja,
 #       Michał: Funkcja celu, kwadraty + funkcja konwersji
@@ -33,21 +34,14 @@ class Specimen:
             #self.image.show()
 
 
-class Square:
-    def __init__(self, border_x, border_y):
-        self.color = [random.randint(0, 255) for k in range(3)]
-        self.alpha = random.randint(0, 100)
-        self.point = [random.randint(0, border_x), random.randint(0, border_y)]    #TODO: CHECK!
-        self.dim = [random.randint(0, border_x-self.point[0]), random.randint(0, border_y-self.point[1])]   #TODO: CHECK!
-
 
 # Check if algorithm should stop
 def is_stop(p):
     return False
 
 
-def create_target(img):
-    arr = np.asarray(img)
+def create_target(image):
+    arr = np.asarray(image)
     return arr
 
 
