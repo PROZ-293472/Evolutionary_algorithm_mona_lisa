@@ -7,7 +7,7 @@ from PIL import Image, ImageDraw
 from src.entities.square import Square
 from src.entities.square import average_square
 
-# TODO: Mateusz: Krzyżowanie, mutacja,
+# TODO: M
 #       Michał: Funkcja celu, kwadraty + funkcja konwersji
 #
 #
@@ -149,7 +149,7 @@ def main():
     u = 1  # miu
     l = 1  # lambda
 
-    prostokaty = 50
+    prostokaty = 100
     tau = 1/ (math.sqrt(prostokaty*2))
     tau_prim = 1/ (math.sqrt(2* math.sqrt(prostokaty)))
     image_x = 1000
@@ -163,24 +163,16 @@ def main():
         reproduced = mutation(reproduced, tau, tau_prim)
     reproduced.show_specimen()
 
-    # Algorithm
 
 
-# while not is_stop(population):
+
+
 # TODO: 1. wybrac populacje o dobrej wielkosci - funkcja generate_random() - done
 #       2. Utworzenie potomnej populacji:
 #             2.1 Krzyżowanie - done, wersja 1. czyli usrednienie rodzicow
 #             2.2 Mutacja
 #       3. Wybór nowej populacji
-# Create temporary population T
-# temporary_population = generate_random(population, l)
 
-# Selection: crossover, mutation then selection
-# reproduced = temporary_population.selection()
-# population = reproduced
-# else:
-# If the stop condition is met, return best specimen
-# best = population.get_best()
 
 if __name__ == '__main__':
     main()
