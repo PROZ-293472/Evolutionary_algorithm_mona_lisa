@@ -1,4 +1,5 @@
 import random
+import numpy as np
 from src.entities.specimen import Specimen
 
 
@@ -14,5 +15,11 @@ class Population:
         for s in self.specimen:
             images.append(s.get_image())
         return images
+
+    def get_images_arrays(self):
+        arrays = []
+        for s in self.specimen:
+            arrays.append(np.asarray(s.get_image()))
+        return arrays
 
 
