@@ -1,37 +1,9 @@
-from PIL import Image
-import copy
-
 import numpy as np
-from PIL import Image, ImageDraw
-
-# TODO: Mateusz: Krzyżowanie, mutacja,
-#       Michał: Funkcja celu, kwadraty + funkcja konwersji
-#
-#
-#
-
-
-class Population:
-    def __init__(self, miu, square_num, image_x, image_y):
-        # Generate population
-        print('Generating population of size:', miu)
-        specimen = []
-        for i in range(0, miu):
-            specimen.append(Specimen(square_num, image_x, image_y))
-
-
-# Member of a population
-class Specimen:
-    def __init__(self, square_num, image_x, image_y):
-        # Generate one member of a population - specimen(image)
-        self.squares = []
-        for i in range(square_num):
-            self.squares.append(Square(100, 100))
-            self.rgbmap = np.zeros((image_x, image_y, 3), dtype=np.uint8) + 255
-            print(self.rgbmap.shape)
-            #self.image = Image.fromarray(self.rgbmap)
-            #self.image.show()
-
+import math
+from PIL import Image
+import psutil
+import time
+from src.modules.algorithm import *
 
 
 # Check if algorithm should stop
@@ -58,25 +30,29 @@ def rgba_to_rgb(rgba_map):
 
 
 def main():
-    print("starting algorithm")
-    u = 10  # miu
-    l = 12  # lambda
-    prostokaty=100
-    image_x=100
-    image_y=100
-    population = Population(u, prostokaty, image_x, image_y)
 
-    # Algorith
-    while not is_stop(population):
-        # Create temporary population T
-        temporary_population = population.generate_random(l);
+    population_size = 5  # miu
+    reproduced_size = 7  # lambda
+    dimension = 1000         #number of squares
+    tau = 1 / (math.sqrt(dimension*2))
+    tau_prim = 1 / (math.sqrt(2 * math.sqrt(dimension)))
+    image_x = 700          #size of target image
+    image_y = 700
 
-        # Selection: crossover, mutation then selection
-        reproduced = temporary_population.selection()
-        population = reproduced
-    else:
-        # If the stop condition is met, return best specimen
-        best = population.get_best()
+    population_p = Population(population_size, dimension, image_x, image_y)
+    images = population_p.get_images()
+    for i in images:
+        i.show()
+
+    for i in range(0, 100):
+        population_t = generate_random(population_p, reproduced_size)
+        population_r = crossover(population_t)
+        population_r = mutation(population_r, tau, tau_prim)
+
+    images = population_r.get_images()
+    for i in images:
+        i.show()
+
 
 if __name__ == '__main__':
     main()
