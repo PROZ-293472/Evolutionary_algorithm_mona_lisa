@@ -27,10 +27,10 @@ class Square:
 
     def mutate_square(self, sigmas, n):
         for i in range(0, 3):
-            self.color[i] = self.color[i] + sigmas.color[i] * n
-        self.alpha = self.alpha + sigmas.alpha * n
-        self.point = (self.point[0] + sigmas.point[0] * n, self.point[1] + sigmas.point[1] * n)
-        self.dim = (self.dim[0] + sigmas.dim[0] * n, self.dim[1] + sigmas.dim[1] * n)
+            self.color[i] = math.floor(self.color[i] + sigmas.color[i] * n)
+        self.alpha = math.floor(self.alpha + sigmas.alpha * n)
+        self.point = (math.floor(self.point[0] + sigmas.point[0] * n), math.floor(self.point[1] + sigmas.point[1] * n))
+        self.dim = (math.floor(self.dim[0] + sigmas.dim[0] * n), math.floor(self.dim[1] + sigmas.dim[1] * n))
 
 
 class Sigma:
@@ -58,13 +58,20 @@ class Sigma:
 
 def average(s1, s2):
     if isinstance(s1, Square):
-        s = Square()
+        s = Square()        #musza byc intami
+        for i in range(0, len(s1.color)):
+            s.color.append(((s1.color[i] + s2.color[i]) // 2))
+        s.alpha = (s1.alpha + s2.alpha) // 2
+        s.RGBA_color = tuple([*s.color, s.alpha])
+        s.point = ((s1.point[0] + s2.point[0]) // 2, (s1.point[1] + s2.point[1]) // 2)
+        s.dim = ((s1.dim[0] + s2.dim[0]) // 2, (s1.dim[1] + s2.dim[1]) // 2)
     else:
-        s = Sigma()
-    for i in range(0, len(s1.color)):
-        s.color.append(((s1.color[i] + s2.color[i])//2))
-    s.alpha = (s1.alpha + s2.alpha)//2
-    s.RGBA_color = tuple([*s.color, s.alpha])
-    s.point = ((s1.point[0] + s2.point[0])/2, (s1.point[1] + s2.point[1])//2)
-    s.dim = ((s1.dim[0] + s2.dim[0])/2, (s1.dim[1] + s2.dim[1])//2)
+        s = Sigma()     #nie musza byc int'ami
+        for i in range(0, len(s1.color)):
+            s.color.append(((s1.color[i] + s2.color[i]) / 2))
+        s.alpha = (s1.alpha + s2.alpha) / 2
+        s.RGBA_color = tuple([*s.color, s.alpha])
+        s.point = ((s1.point[0] + s2.point[0]) / 2, (s1.point[1] + s2.point[1]) / 2)
+        s.dim = ((s1.dim[0] + s2.dim[0]) / 2, (s1.dim[1] + s2.dim[1]) / 2)
+
     return s
