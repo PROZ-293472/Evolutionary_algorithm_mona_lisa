@@ -8,22 +8,6 @@ def is_stop(p):
     return False
 
 
-def create_target(image):
-    arr = np.asarray(image)
-    return arr
-
-
-def calculate_error(rgba_map, target_map):
-    sub = np.subtract(rgba_to_rgb(rgba_map), target_map)
-    (raw_errR, raw_errG, raw_errB) = (np.sum(sub[0, :, :]), np.sum(sub[1, :, :]), np.sum(sub[2, :, :]))
-    # TODO: Wymyslec, w jaki sposob normalizowac bledy
-    return raw_errR, raw_errG, raw_errB
-
-
-def rgba_to_rgb(rgba_map):
-    img = Image.fromarray(rgba_map)
-    img = img.convert('RGB')
-    return np.asarray(img)
 
 
 def main():

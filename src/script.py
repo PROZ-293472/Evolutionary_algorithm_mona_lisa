@@ -1,6 +1,7 @@
 import numpy as np
 from PIL import Image, ImageDraw
 
+from src.entities.helpers import ImageHelper
 from src.entities.square import Square
 
 #im = Image.open('mona.png')
@@ -8,36 +9,43 @@ from src.entities.square import Square
 #arr = np.asarray(im)
 #print(arr)
 #print(arr.dtype)
-a = [1,2,3]
-b = 4
-c = tuple([a,b])
-img = Image.new('RGB', (100, 100))
-drw = ImageDraw.Draw(img, 'RGBA')
-drw.polygon([(50, 0), (100, 100), (0, 100)], (255, 0, 0, 125))
-drw.polygon([(50,100), (100, 0), (0, 0)], (0, 255, 0, 125))
-del drw
 #img.show()
+from src.entities.targetfun import TargetFunction
 
-
-img = Image.new('RGB', (500, 500), (255, 255, 255))
-for i in range (1,100):
-    sqr = Square(500, 500)
+dim = 500
+img = Image.new('RGB', (dim, dim), (255, 255, 255))
+for i in range(0, 100):
+    sqr = Square(dim, dim)
+    # print(sqr.dim)
+    # print(sqr.RGBA_color)
     sqr.draw(img)
+#img = img.convert('RGB')
 img.show()
-#im1 = Image.fromarray(arr)
-#im1 = im1.convert('RGB')
-#arr1 = np.asarray(im1)
-#sqr  = Square()
-#print(arr1.shape)
 
-b = np.array([[[1,2,3],[4,5,6],[7,8,9]] , [[11,12,13],[14,15,16],[17,18,19]]])
-(a,b,c) = (np.sum(b[0, :, :]), b[0, 1, 0], b[0, 0, 1])
-print(a)
+arr = np.asarray(img)
+# print(arr[:,:,2])
+
+img2 = Image.new('RGB', (dim, dim), (255, 255, 255))
+target_arr = np.asarray(img2)
+print(TargetFunction.target_fucntion(arr,target_arr))
+
+color_errors = TargetFunction.calculate_error(arr, target_arr)
+print(color_errors)
+
+# macierz = np.array([[[1,2,3],[4,5,6],[7,8,9]] , [[11,12,13],[14,15,16],[17,18,19]]])
+# (a,b,c) = (np.sum(macierz[0, :, :]), macierz[0, 1, 0], macierz[0, 0, 1])
+# print(a)
 #[warstwa, rzad, kolumna]
 
-im2 = Image.new('RGB', (357, 500), (255,255,255))
-arr2 = np.asarray(im2)
-#print(np.subtract(arr2, arr)[0,:])
-arr3 = np.subtract(arr2, arr)
-im3 = Image.fromarray(arr3)
-#im3.show()
+# im = Image.open('C:\\Users\\Lenovo\\PycharmProjects\\PSZT-1\\content\\mona.png')
+# print(im.size)
+# arr = np.asarray(im)
+# im2 = Image.new('RGB', (357, 500), (255,255,255))
+# arr2 = np.asarray(im2)
+# arr3 = np.subtract(arr2, arr)
+# np.savetxt('mona_test.out', arr[2])
+# im3 = Image.fromarray(arr3)
+# #im3.show()
+
+# (err_R, err_G, err_B) = TargetFunction.calculate_error(arr, arr2)
+# print((err_R, err_G, err_B))
