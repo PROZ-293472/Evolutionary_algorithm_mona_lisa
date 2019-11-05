@@ -14,7 +14,7 @@ class Square:
             self.dim = (0, 0)
         else:
             self.color = [random.randint(0, 255) for k in range(3)]
-            self.alpha = random.randint(0, 100)
+            self.alpha = random.randint(0, 255)
             self.RGBA_color = tuple([*self.color, self.alpha])
             self.point = (random.randint(0, border_x), random.randint(0, border_y))
             self.dim = (random.randint(0, border_x-self.point[0]), random.randint(0, border_y-self.point[1]))   #TODO: CHECK!
