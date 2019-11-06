@@ -44,13 +44,33 @@ def generate_random(population, l):
     return temporary
 
 
-# Returns new population of size miu
-def selection(population_r, target_image, miu):
-    population_size = len(population_r.specimen)
-    fitness_list = population_r.get_fitness(target_image)
+# Returns new population of size mi
+def selection(population_r, population_p, target_image, mi):
+    population_p_r = population_p + population_r
+
+    # normalization
+    population_size = len(population_p_r.specimen)
+    fitness_list = population_p_r.get_fitness(target_image)
     fitness_sum = sum(fitness_list)
     norm_fitness_list = [fitness_list[i]/fitness_sum for i in range(0, population_size)]
-    # print(norm_fitness_list)
 
+    # sorting
+    population_p_r = [x for _, x in sorted(zip(norm_fitness_list, population_p_r))]  # TODO: check this!
 
+    # probabilities
+    prob = []
+    temp = 0
+    for n in norm_fitness_list:
+        temp += n
+        prob.append(temp)
 
+    # main part
+    new_population = []
+    for i in range(0, mi):
+        rand_num = random.random()
+        for p in prob:
+            if p >= rand_num:
+                new_population.append(population_p_r[prob.index(p)])
+                break
+
+    return new_population
