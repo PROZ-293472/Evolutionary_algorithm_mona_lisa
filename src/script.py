@@ -1,5 +1,6 @@
 import numpy as np
 from PIL import Image, ImageDraw
+import random
 
 from src.entities.helpers import ImageHelper
 from src.entities.square import Square
@@ -11,6 +12,10 @@ from src.entities.square import Square
 #print(arr.dtype)
 #img.show()
 from src.entities.targetfun import TargetFunction
+
+
+# random.seed(1)
+print(random.random())
 
 dim = 500
 img = Image.new('RGB', (dim, dim), (255, 255, 255))

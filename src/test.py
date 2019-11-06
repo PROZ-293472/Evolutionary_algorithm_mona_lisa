@@ -33,20 +33,20 @@ def main():
     # TargetFunction.calculate_error(np.asarray(img), target_image)
 
     population_p = Population(population_size, dimension, image_x, image_y)
-    selection(population_p, target_image, reproduced_size)
-    # images = population_p.get_images()
+    # selection(population_p, target_image, reproduced_size)
+    images = population_p.get_images()
     # for i in images:
     #     i.show()
-    #
-    # for i in range(0, 100):
-    #     population_t = generate_random(population_p, reproduced_size)
-    #     population_r = crossover(population_t)
-    #     population_r = mutation(population_r, tau, tau_prim)
-    #     population_p = population_r         # tutaj selekcja
-    #
-    # images = population_p.get_images()
-    # for i in images:
-    #     i.show()
+
+    for i in range(0, 10):
+        population_t = generate_random(population_p, reproduced_size)
+        population_r = crossover(population_t)
+        population_r = mutation(population_r, tau, tau_prim)
+        population_p = selection(population_r, population_p, target_image, population_size)         # tutaj selekcja
+
+    images = population_p.get_images()
+    for i in images:
+        i.show()
 
 
 if __name__ == '__main__':
