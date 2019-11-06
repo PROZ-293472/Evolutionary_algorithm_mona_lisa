@@ -1,6 +1,5 @@
-import random
-import numpy as np
 from src.entities.specimen import Specimen
+from src.entities.targetfun import *
 
 
 class Population:
@@ -21,5 +20,12 @@ class Population:
         for s in self.specimen:
             arrays.append(np.asarray(s.get_image()))
         return arrays
+
+    def get_fitness(self, target_img):
+        fitness = []
+        for s in self.specimen:
+            fitness.append(TargetFunction.target_function(np.asarray(s.get_image()), target_img))
+        return fitness
+
 
 

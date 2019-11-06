@@ -42,3 +42,15 @@ def generate_random(population, l):
     for i in range(0, l):
         temporary.specimen.append(random.choice(population.specimen))
     return temporary
+
+
+# Returns new population of size miu
+def selection(population_r, target_image, miu):
+    population_size = len(population_r.specimen)
+    fitness_list = population_r.get_fitness(target_image)
+    fitness_sum = sum(fitness_list)
+    norm_fitness_list = [fitness_list[i]/fitness_sum for i in range(0, population_size)]
+    # print(norm_fitness_list)
+
+
+

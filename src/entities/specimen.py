@@ -23,3 +23,5 @@ class Specimen:
         for s in self.squares:
             s.draw(background)
         return background
+
+

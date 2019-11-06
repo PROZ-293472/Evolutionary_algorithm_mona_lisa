@@ -7,7 +7,7 @@ from PIL import Image
 class TargetFunction:
 
     @staticmethod
-    def target_fucntion(image, target_image):
+    def target_function(image, target_image):
         image_array = np.asarray(image)
         target_image = np.asarray(target_image)
         errors = TargetFunction.calculate_error(image_array, target_image)
