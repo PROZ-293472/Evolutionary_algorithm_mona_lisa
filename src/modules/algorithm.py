@@ -45,8 +45,8 @@ def generate_random(population, l):
 
 
 # Returns new population of size mi
-def selection(population_r, population_p, target_image, mi):
-    population_p_r = population_p + population_r
+def selection(population_p, population_r, target_image, mi):
+    population_p_r = population_p.merge(population_r)
 
     # normalization
     population_size = len(population_p_r.specimen)
@@ -54,8 +54,10 @@ def selection(population_r, population_p, target_image, mi):
     fitness_sum = sum(fitness_list)
     norm_fitness_list = [fitness_list[i]/fitness_sum for i in range(0, population_size)]
 
+    print(sum(norm_fitness_list))  # for testing purposes
+
     # sorting
-    population_p_r = [x for _, x in sorted(zip(norm_fitness_list, population_p_r))]  # TODO: check this!
+    population_p_r.specimen = [x for _, x in sorted(zip(norm_fitness_list, population_p_r.specimen))]  # TODO: check this!
 
     # probabilities
     prob = []
@@ -65,12 +67,12 @@ def selection(population_r, population_p, target_image, mi):
         prob.append(temp)
 
     # main part
-    new_population = []
+    new_specimen = []
     for i in range(0, mi):
         rand_num = random.random()
         for p in prob:
             if p >= rand_num:
-                new_population.append(population_p_r[prob.index(p)])
+                new_specimen.append(population_p_r.specimen[prob.index(p)])
                 break
 
-    return new_population
+    return Population(specimen=new_specimen)
