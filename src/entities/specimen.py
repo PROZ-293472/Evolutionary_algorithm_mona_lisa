@@ -10,7 +10,7 @@ class Specimen:
         self.image_y = image_y
         self.squares = []
         self.square_num = square_num
-        self.image = Image.new('RGB', (image_x, image_y), (255, 255, 255))
+        self.image = Image.new('RGB', (image_x, image_y), (0, 0, 0))
         self.sigmas = []
 
         if not child:
@@ -19,7 +19,7 @@ class Specimen:
                 self.sigmas.append(Sigma((self.squares[i])))
 
     def get_image(self):
-        background = Image.new('RGB', (self.image_x, self.image_y), (255, 255, 255))
+        background = Image.new('RGB', (self.image_x, self.image_y), (0, 0, 0))
         for s in self.squares:
             s.draw(background)
         return background

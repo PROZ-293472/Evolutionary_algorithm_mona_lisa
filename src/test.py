@@ -12,11 +12,15 @@ def is_stop(p):
 
 def main():
     target_image = Image.open("mona.png")
-    # target_image.show()
+    # temp_image = Image.new('RGB', (357, 500), (255,255,255))
+    # # target_image.show()
     target_image = np.asarray(target_image)
+    # temp_image = np.asarray(temp_image)
+    # target_image = np.subtract(temp_image,target_image)
+
     population_size = 10  # miu
     reproduced_size = 4  # lambda
-    dimension = 1000         # number of squares
+    dimension = 1        # number of squares
     tau = 1 / (math.sqrt(dimension*2))
     tau_prim = 1 / (math.sqrt(2 * math.sqrt(dimension)))
     image_x = 357          # size of target image
@@ -38,11 +42,14 @@ def main():
     # for i in images:
     #     i.show()
 
-    for i in range(0, 10):
+    for i in range(0, 1):
+        print(sum(population_p.get_fitness(target_image)))
         population_t = generate_random(population_p, reproduced_size)
         population_r = crossover(population_t)
         population_r = mutation(population_r, tau, tau_prim)
-        population_p = selection(population_r, population_p, target_image, population_size)         # tutaj selekcja
+        population_p = selection(population_r, population_p, target_image, population_size) # tutaj selekcja
+
+
 
     images = population_p.get_images()
     for i in images:
