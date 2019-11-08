@@ -15,7 +15,7 @@ class Specimen:
 
         if not child:
             for i in range(square_num):
-                self.squares.append(Square(image_x, image_y))
+                self.squares.append(Square(image_x, image_y, True))
                 self.sigmas.append(Sigma((self.squares[i])))
 
     def get_image(self):

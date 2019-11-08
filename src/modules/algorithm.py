@@ -1,3 +1,5 @@
+import operator
+
 from src.entities.square import average
 from src.entities.specimen import Specimen
 from src.entities.population import Population
@@ -56,7 +58,15 @@ def selection(population_p, population_r, target_image, mi):
     #print(sum(norm_fitness_list))  # for testing purposes
 
     # sorting
-    population_p_r.specimen = [x for _, x in sorted(zip(norm_fitness_list, population_p_r.specimen))]  # TODO: check this!
+    pre_sorted = [[norm_fitness_list[population_p_r.specimen.index(x)], x] for x in population_p_r.specimen]
+    i= [x for x in sorted(pre_sorted, key=operator.itemgetter(0))]
+    i = np.array(i).transpose()
+    # print(i)
+
+    norm_fitness_list = i[0]
+    population_p_r.specimen = i[1]
+
+    #[x for _, x in sorted(zip(norm_fitness_list, population_p_r.specimen))]  # TODO: check this!
 
     # probabilities
     prob = []

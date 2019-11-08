@@ -1,3 +1,4 @@
 resources
 .idea
 src/script.py
+/venv
