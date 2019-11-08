@@ -53,8 +53,7 @@ def selection(population_p, population_r, target_image, mi):
     fitness_list = population_p_r.get_fitness(target_image)
     fitness_sum = sum(fitness_list)
     norm_fitness_list = [fitness_list[i]/fitness_sum for i in range(0, population_size)]
-
-    print(sum(norm_fitness_list))  # for testing purposes
+    #print(sum(norm_fitness_list))  # for testing purposes
 
     # sorting
     population_p_r.specimen = [x for _, x in sorted(zip(norm_fitness_list, population_p_r.specimen))]  # TODO: check this!
@@ -69,7 +68,7 @@ def selection(population_p, population_r, target_image, mi):
     # main part
     new_specimen = []
     for i in range(0, mi):
-        rand_num = random.random()
+        rand_num = random.random()*temp
         for p in prob:
             if p >= rand_num:
                 new_specimen.append(population_p_r.specimen[prob.index(p)])

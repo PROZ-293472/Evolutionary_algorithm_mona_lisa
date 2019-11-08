@@ -28,7 +28,16 @@ class Square:
     def mutate_square(self, sigmas, n):
         for i in range(0, 3):
             self.color[i] = math.floor(self.color[i] + sigmas.color[i] * n)
+            if self.color[i] > 255:
+                self.color[i] = 255
+            elif self.color[i] < 0:
+                self.color[i] = 0
         self.alpha = math.floor(self.alpha + sigmas.alpha * n)
+        if self.alpha > 255:
+            self.alpha = 255
+        elif self.alpha < 0:
+            self.alpha = 0
+        self.RGBA_color = tuple([*self.color, self.alpha])
         self.point = (math.floor(self.point[0] + sigmas.point[0] * n), math.floor(self.point[1] + sigmas.point[1] * n))
         self.dim = (math.floor(self.dim[0] + sigmas.dim[0] * n), math.floor(self.dim[1] + sigmas.dim[1] * n))
 

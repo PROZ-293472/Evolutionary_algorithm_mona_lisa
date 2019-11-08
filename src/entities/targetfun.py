@@ -7,10 +7,10 @@ from PIL import Image
 class TargetFunction:
 
     @staticmethod
-    def target_function(image, target_image):
+    def target_function(image, target_image_matrix):
         image_array = np.asarray(image)
-        target_image = np.asarray(target_image)
-        errors = TargetFunction.calculate_error(image_array, target_image)
+        # target_image = np.asarray(target_image)
+        errors = TargetFunction.calculate_error(image_array, target_image_matrix)
         temp = 0
         for err in errors:
             temp += math.pow(err, 2)
